@@ -1,9 +1,11 @@
 package com.task.countriescities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.task.countriescities.databinding.FragmentCountriesCitiesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -12,6 +14,8 @@ class CountriesCitiesFragment : Fragment() {
 
     private var _binding: FragmentCountriesCitiesBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: CountriesCitiesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +32,12 @@ class CountriesCitiesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.fetchCountriesData()
+        viewModel.countries.observe(viewLifecycleOwner) {
+            it.let {
+                Log.d("Fetch Countries", it.msg)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

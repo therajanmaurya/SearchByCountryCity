@@ -5,7 +5,9 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.task.countriescities.databinding.FragmentCountriesCitiesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CountriesCitiesFragment : Fragment() {
 
     private var _binding: FragmentCountriesCitiesBinding? = null

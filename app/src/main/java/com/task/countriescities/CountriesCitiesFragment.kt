@@ -37,11 +37,6 @@ class CountriesCitiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchCountriesData()
-        viewModel.countries.observe(viewLifecycleOwner) {
-            it.let {
-                Log.d("Fetch Countries", it.msg)
-            }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -50,15 +45,14 @@ class CountriesCitiesFragment : Fragment() {
         val searchView: SearchView = searchItem?.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                // Toast like print
-                // Run Search query here
+                viewModel.searchQuery.postValue(query)
                 if (!searchView.isIconified) searchView.isIconified = true
                 searchItem.collapseActionView()
                 return false
             }
 
-            override fun onQueryTextChange(s: String): Boolean {
-
+            override fun onQueryTextChange(query: String): Boolean {
+                viewModel.searchQuery.postValue(query)
                 return false
             }
         })

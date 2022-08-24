@@ -1,6 +1,7 @@
 package com.task.countriescities
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.task.countriescities.api.CountriesRepository
 import com.task.countriescities.data.Countries
@@ -9,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback;
 import retrofit2.Response
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,6 +20,7 @@ class CountriesCitiesViewModel @Inject constructor(
 
     var countries = MutableLiveData<Countries>()
     val countryCityStates = MutableLiveData<List<EpoxyExpandModel>>(arrayListOf())
+    val searchQuery = MutableLiveData<String>().apply { value = "" }
 
     fun fetchCountriesData() {
         repository.fetchCountries().enqueue(object : Callback<Countries> {
@@ -26,7 +29,7 @@ class CountriesCitiesViewModel @Inject constructor(
                 response.body()?.let {
                     countries.postValue(it)
                     val countryStates = mutableListOf<EpoxyExpandModel>()
-                    it.data.forEach { country ->
+                    it.data?.forEach { country ->
                         oldCountryCityStates?.find { it.id == country.country }?.let {
                             countryStates.add(it)
                         } ?: run {

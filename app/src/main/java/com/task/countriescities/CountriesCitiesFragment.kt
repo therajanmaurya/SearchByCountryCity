@@ -15,7 +15,7 @@ class CountriesCitiesFragment : Fragment() {
     private var _binding: FragmentCountriesCitiesBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: CountriesCitiesViewModel by viewModels()
+    val viewModel: CountriesCitiesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

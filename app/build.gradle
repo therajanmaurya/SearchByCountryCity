@@ -32,7 +32,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        viewBinding true
+        dataBinding = true
     }
 }
 
@@ -51,6 +51,10 @@ dependencies {
 
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-compiler:2.38.1"
+
+    implementation "com.airbnb.android:epoxy:5.0.0-beta05"
+    implementation "com.airbnb.android:epoxy-databinding:5.0.0-beta05"
+    kapt "com.airbnb.android:epoxy-processor:5.0.0-beta05"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

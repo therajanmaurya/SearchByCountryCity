@@ -26,7 +26,11 @@ class CountriesCitiesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCountriesCitiesBinding.inflate(inflater, container, false)
+        _binding = FragmentCountriesCitiesBinding.inflate(inflater, container, false).apply {
+            fragment = this@CountriesCitiesFragment
+            countriesCitiesViewModel = viewModel
+            lifecycleOwner = this@CountriesCitiesFragment
+        }
         return binding.root
     }
 

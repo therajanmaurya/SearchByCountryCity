@@ -15,7 +15,7 @@ class CountriesCitiesViewModel @Inject constructor(
     private val repository: CountriesRepository
 ) : ViewModel() {
 
-    var countries: MutableLiveData<Countries> = MutableLiveData<Countries>()
+    var countries = MutableLiveData<Countries>()
 
     fun fetchCountriesData() {
         repository.fetchCountries().enqueue(object : Callback<Countries> {
